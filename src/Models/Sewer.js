@@ -31,6 +31,6 @@ const sewerSchema = new mongoose.Schema({
   }
 });
 
-const Sewer = mongoose.model('Sewer', sewerSchema);
+const Sewer = mongoose.model('Sewer', sewerSchema, 'sewers');
 
 export default Sewer;
