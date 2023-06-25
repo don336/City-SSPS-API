@@ -28,9 +28,9 @@
 - `PUT /api/resource/:id` - Update an existing resource.
 - `DELETE /api/resource/:id` - Delete resource
 
-### Dependencies
+## Dependencies
 
-## The Node API relies on the following dependencies:
+### The Node API relies on the following dependencies:
 
 1. Express: Fast, unopinionated, minimalist web framework for Node.js.
 2. Mongoose: MongoDB object modeling tool.
