@@ -1,4 +1,4 @@
-const Sewer = require('../Models/Sewer');
+import Sewer from '../Models/Sewer';
 
 class SewerController {
   static async getAllSewers(req, res) {

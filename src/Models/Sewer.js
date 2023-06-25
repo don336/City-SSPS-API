@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const sewerSchema = new mongoose.Schema({
+const sewerSchema = mongoose.Schema({
   city: {
     type: String,
     required: true
@@ -19,7 +19,8 @@ const sewerSchema = new mongoose.Schema({
   },
   dateReport: {
     type: Date,
-    required: true
+    default: Date.now,
+    immutable: true,
   },
   level: {
     type: Number,
@@ -31,6 +32,4 @@ const sewerSchema = new mongoose.Schema({
   }
 });
 
-const Sewer = mongoose.model('Sewer', sewerSchema, 'sewers');
-
-export default Sewer;
+export default mongoose.model('Sewer', sewerSchema, 'sewers');
