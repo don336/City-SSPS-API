@@ -2,10 +2,13 @@ const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
   info: {
-    title: "IdeaPal",
-    description: "This is an Article Application",
+    title: "City SSPS API",
+    description: "City SSPS API to report problems in the city",
   },
-  host: "ideapal.onrender.com",
+  //host: "ideapal.onrender.com",
+  //schemes: ["https"],
+
+  host: "city-ssps-api-78vo.onrender.com",
   schemes: ["https"],
 };
 
