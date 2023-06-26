@@ -13,10 +13,13 @@
   "paths": {
     "/api/v1/street/{userId}/": {
       "get": {
-        "description": "",
+        "summary":"Search Cases",
+        "tags":["Street Problems:"],
+        "description": "This route lets you search for street cases.",
         "parameters": [
           {
             "name": "userId",
+            "description": "Please submit the id of your case",
             "in": "path",
             "required": true,
             "type": "string"
@@ -25,31 +28,41 @@
         "responses": {}
       },
       "post": {
-        "description": "",
+        "summary":["Submit a New Case"],
+        "tags":["Street Problems:"],
+        "description": "This route lets you submit a new case.",
         "parameters": [],
         "responses": {}
       }
     },
     "/api/v1/street/{userId}/{id}": {
       "get": {
-        "description": "",
+        "summary":"Search for a Case",
+        "tags":["Street Problems:"],
+        "description": "This route lets you search for a street case.",
         "parameters": [],
         "responses": {}
       },
       "put": {
-        "description": "",
+        "summary":"Update a Case",
+        "tags":["Street Problems:"],
+        "description": "This route lets you update a street case.",
         "parameters": [],
         "responses": {}
       },
       "delete": {
-        "description": "",
+        "summary":"Delete a Case",
+        "tags":["Street Problems:"],
+        "description": "This route lets you delete a street case.",
         "parameters": [],
         "responses": {}
       }
     },
     "/api/v1/sewer/": {
       "post": {
-        "description": "",
+        "summary":"Submit a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you submit a sewer case.",
         "parameters": [
           {
             "name": "body",
@@ -95,7 +108,9 @@
         }
       },
       "get": {
-        "description": "",
+        "summary":"Search Cases",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you search for sewer cases.",
         "parameters": [],
         "responses": {
           "200": {
@@ -109,7 +124,9 @@
     },
     "/api/v1/sewer/{id}": {
       "put": {
-        "description": "",
+        "summary":"Update a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you update a sewer case.",
         "parameters": [
           {
             "name": "id",
@@ -164,7 +181,9 @@
         }
       },
       "get": {
-        "description": "",
+        "summary":"Search a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you search for a sewer case.",
         "parameters": [
           {
             "name": "id",
@@ -186,7 +205,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "summary":"Delete a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you delete a sewer case.",
         "parameters": [
           {
             "name": "id",
@@ -206,13 +227,6 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
       }
     }
   }
