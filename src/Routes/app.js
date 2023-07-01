@@ -3,8 +3,24 @@ import cors from "cors";
 import connect from "../db/mongoos";
 import Route from "./api-v1/routes";
 import swaggerRouter from "./swaggerRoute";
+import passportApp from 'passport';
+import sessionApp from 'express-session';
 connect();
 const app = express();
+
+app.use(sessionApp({
+  secret: 'thissession',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false}
+}));
+
+
+app.use(passportApp.initialize())
+app.use(passportApp.session())
+
+require('../auth/auth.js')
+
 app.use(cors());
 app.use(express.json());
 app.use(Route);
