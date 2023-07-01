@@ -1,37 +1,39 @@
 import express from 'express';
-import { google } from 'googleapis';
-import { OAuth2Client } from 'google-auth-library';
-import dotenv from 'dotenv';
+import session from 'express-session';
+import passport from 'passport';
 
-dotenv.config();
+const routerUser = express.Router();
 
-const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = process.env;
+function isLoggedIn(req, res, next) {
+    req.user ? next() : res.sendStatus(401);
+}
 
-const authRouter = express.Router();
-const oauth2Client = new google.auth.OAuth2(
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REDIRECT_URI
+routerUser.get('/auth/login',
+    passport.authenticate('google', {
+        scope: ['email', 'profile']
+    })
 );
 
-// OAuth Routes
-authRouter.get('/oauth', (req, res) => {
-  const authUrl = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: ['https://www.googleapis.com/auth/plus.me'],
-  });
+routerUser.get('/auth/callback',
+    passport.authenticate('google', {
+        successRedirect: '/user/protected',
+        failureRedirect: '/user/auth/failure',
+        scope: ['email', 'profile']
+    })
+);
 
-  res.redirect(authUrl);
+routerUser.get('/protected', isLoggedIn, (req, res) => {
+    let name = req.user.displayName;
+    res.send(`Hello there ${name}!`);
 });
 
-authRouter.get('/oauth-callback', async (req, res) => {
-  const { code } = req.query;
-  const { tokens } = await oauth2Client.getToken(code);
-  oauth2Client.setCredentials(tokens);
-
-  // Perform additional logic with the tokens, such as storing them in the database or using them to make API requests
-
-  res.send('OAuth callback successful!');
+routerUser.get('/auth/failure', (req, res) => {
+    res.send('Something went wrong!');
 });
 
-export default authRouter;
+routerUser.use('/auth/logout', (req, res) => {
+    req.session.destroy();
+    res.send('Logged out successfully, see you soon!');
+});
+
+export default routerUser;
