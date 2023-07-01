@@ -5,6 +5,8 @@ import Route from "./api-v1/routes";
 import swaggerRouter from "./swaggerRoute";
 import passportApp from 'passport';
 import sessionApp from 'express-session';
+import isAuthenticated from "../middleware/auth";
+
 connect();
 const app = express();
 
@@ -45,6 +47,10 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode).json({
     message: err.message,
   });
+});
+
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
 
 export default app;
