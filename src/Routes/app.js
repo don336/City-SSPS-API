@@ -17,16 +17,18 @@ app.use(sessionApp({
   cookie: { secure: false}
 }));
 
+require('../auth/auth.js');
 
-app.use(passportApp.initialize())
-app.use(passportApp.session())
 
-require('../auth/auth.js')
+
 
 app.use(cors());
 app.use(express.json());
-app.use(Route);
-app.use("/", swaggerRouter);
+
+app.use(passportApp.initialize());
+app.use(passportApp.session());
+
+//app.use("/", swaggerRouter);
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -39,6 +41,11 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+//app.use('/user', isAuthenticated);
+
+app.use(Route);
+
 // Handling Errors
 app.use((err, req, res, next) => {
   // console.log(err);
@@ -49,8 +56,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
+
 
 export default app;

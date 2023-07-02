@@ -7,7 +7,7 @@ export const isAuthenticated = (req, res, next) => {
   }
 
   // User is not authenticated, send an error message and redirect to the login page
-  res.status(401).json({ message: 'Access not authorized, please login' });
+  res.status(401).json({ message: 'Unauthorized' });
 };
 
 export default isAuthenticated;

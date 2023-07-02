@@ -8,11 +8,17 @@ function isLoggedIn(req, res, next) {
     req.user ? next() : res.sendStatus(401);
 }
 
-routerUser.get('/auth/login',
+routerUser.get('/auth/login', (req, res, next) => {
+    if (req.isAuthenticated()) {
+      // User is already authenticated, redirect to protected route or home page
+      return res.redirect('/user/protected');
+    }
+  
+    // User is not authenticated, proceed with authentication
     passport.authenticate('google', {
-        scope: ['email', 'profile']
-    })
-);
+      scope: ['email', 'profile']
+    })(req, res, next);
+  });
 
 routerUser.get('/auth/callback',
     passport.authenticate('google', {
@@ -28,12 +34,18 @@ routerUser.get('/protected', isLoggedIn, (req, res) => {
 });
 
 routerUser.get('/auth/failure', (req, res) => {
-    res.send('Something went wrong!');
-});
+    req.flash('error', req.flash('error')[0]); 
+    res.redirect('/user/auth/login'); 
+  });
 
-routerUser.use('/auth/logout', (req, res) => {
-    req.session.destroy();
-    res.send('Logged out successfully, see you soon!');
-});
+routerUser.get('/auth/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+      }
+      res.clearCookie('connect.sid');
+      res.redirect('/'); 
+    });
+  });
 
 export default routerUser;
