@@ -1,7 +1,6 @@
-import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import dotenv from 'dotenv';
-
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import dotenv from "dotenv";
 dotenv.config();
 
 passport.use(
@@ -13,7 +12,7 @@ passport.use(
       passReqToCallback: true,
     },
     function (_request, accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      done(null, profile, accessToken, refreshToken);
     }
   )
 );
