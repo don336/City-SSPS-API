@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 export const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -7,7 +7,7 @@ export const isAuthenticated = (req, res, next) => {
   }
 
   // User is not authenticated, send an error message and redirect to the login page
-  res.status(401).json({ message: 'Unauthorized' });
+  res.status(401).json({ message: "Unauthorized" });
 };
 
 export default isAuthenticated;
