@@ -1,29 +1,35 @@
 import mongoose from "mongoose";
 
 const streetSchema = mongoose.Schema({
-  streetName: {
+  city: {
     type: String,
-    required: true,
+    required: true
   },
-
-  City: {
+  neighborhood: {
     type: String,
-    required: true,
+    required: true
   },
-
-  State: {
+  fullName: {
     type: String,
-    required: true,
+    required: true
   },
-  Country: {
+  email: {
     type: String,
-    required: true,
+    required: true
   },
-  dateCreated: {
+  dateReport: {
     type: Date,
     default: Date.now,
     immutable: true,
   },
+  level: {
+    type: Number,
+    required: true
+  },
+  comments: {
+    type: String,
+    required: true
+  }
 });
 
 export default mongoose.model("Street", streetSchema);
