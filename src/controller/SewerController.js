@@ -1,12 +1,15 @@
-import Sewer from '../Models/Sewer';
+import Sewer from "../Models/Sewer";
 
 class SewerController {
   static async getAllSewers(req, res) {
     try {
       const sewers = await Sewer.find();
-      res.json(sewers);
+      return res.status(200).json(sewers);
     } catch (error) {
-      res.status(500).json({ error: 'An error occurred while fetching the sewer problem list.' });
+      return res.status(500).json({
+        message: "Server Error",
+        Error: error.message,
+      });
     }
   }
 
@@ -15,38 +18,70 @@ class SewerController {
     try {
       const sewer = await Sewer.findById(id);
       if (!sewer) {
-        return res.status(404).json({ error: 'Sewer not found.' });
+        return res.status(404).json({ error: "Sewer not found." });
       }
-      res.json(sewer);
+      return res.status(200).json(sewer);
     } catch (error) {
-      res.status(500).json({ error: 'An error occurred while fetching the sewer Id.' });
+      return res.status(500).json({
+        message: "Server Error",
+        Error: error.message,
+      });
     }
   }
 
   static async createSewer(req, res) {
-    const { city, neighborhood, fullName, email, dateReport, level, comments } = req.body;
+    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+      req.body;
 
     // Validate required fields
-    if (!city || !neighborhood || !fullName || !email || !dateReport || !level || !comments) {
-      return res.status(400).json({ error: 'Missing required fields.' });
+    if (
+      !city ||
+      !neighborhood ||
+      !fullName ||
+      !email ||
+      !dateReport ||
+      !level ||
+      !comments
+    ) {
+      return res.status(400).json({ error: "Missing required fields." });
     }
 
     try {
-      const sewer = new Sewer({ city, neighborhood, fullName, email, dateReport, level, comments });
-      await sewer.save();
-      res.status(201).json(sewer);
+      const sewer = new Sewer.create({
+        city,
+        neighborhood,
+        fullName,
+        email,
+        dateReport,
+        level,
+        comments,
+      });
+
+      return res.status(201).json(sewer);
     } catch (error) {
-      res.status(500).json({ error: 'An error occurred while creating the sewer.' });
+      return res.status(500).json({
+        message: "Server Error",
+        Error: error.message,
+      });
     }
   }
 
   static async updateSewer(req, res) {
     const { id } = req.params;
-    const { city, neighborhood, fullName, email, dateReport, level, comments } = req.body;
+    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+      req.body;
 
     // Validate required fields
-    if (!city || !neighborhood || !fullName || !email || !dateReport || !level || !comments) {
-      return res.status(400).json({ error: 'Missing required fields.' });
+    if (
+      !city ||
+      !neighborhood ||
+      !fullName ||
+      !email ||
+      !dateReport ||
+      !level ||
+      !comments
+    ) {
+      return res.status(400).json({ error: "Missing required fields." });
     }
 
     try {
@@ -56,11 +91,14 @@ class SewerController {
         { new: true }
       );
       if (!sewer) {
-        return res.status(404).json({ error: 'Sewer not found.' });
+        return res.status(404).json({ error: "Sewer not found." });
       }
-      res.json(sewer);
+      return res.status(201).json(sewer);
     } catch (error) {
-      res.status(500).json({ error: 'An error occurred while updating the sewer problem.' });
+      return res.status(500).json({
+        message: "Server Error",
+        Error: error.message,
+      });
     }
   }
 
@@ -69,11 +107,14 @@ class SewerController {
     try {
       const sewer = await Sewer.findByIdAndDelete(id);
       if (!sewer) {
-        return res.status(404).json({ error: 'Sewer not found.' });
+        return res.status(404).json({ error: "Sewer not found." });
       }
-      res.sendStatus(204);
+      return res.Status(204);
     } catch (error) {
-      res.status(500).json({ error: 'An error occurred while deleting the sewer.' });
+      return res.status(500).json({
+        message: "Server Error",
+        Error: error.message,
+      });
     }
   }
 }
