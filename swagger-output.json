@@ -401,5 +401,112 @@
         }
       }
     }
+  },
+  "/api/v1/security/{id}": {
+    "put": {
+      "summary":"Update a Case",
+      "tags":["Security Problems:"],
+      "description": "This route lets you update a security case.",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "example": "any"
+              },
+              "neighborhood": {
+                "example": "any"
+              },
+              "fullName": {
+                "example": "any"
+              },
+              "email": {
+                "example": "any"
+              },
+              "dateReport": {
+                "example": "any"
+              },
+              "level": {
+                "example": "any"
+              },
+              "comments": {
+                "example": "any"
+              }
+            }
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "404": {
+          "description": "Not Found"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    },
+    "get": {
+      "summary":"Search a Case",
+      "tags":["Security Problems:"],
+      "description": "This route lets you search for a security case.",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "404": {
+          "description": "Not Found"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    },
+    "delete": {
+      "summary":"Delete a Case",
+      "tags":["Security Problems:"],
+      "description": "This route lets you delete a security case.",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "No Content"
+        },
+        "404": {
+          "description": "Not Found"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
   }
 }
