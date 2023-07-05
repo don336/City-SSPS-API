@@ -4,8 +4,8 @@ const streetRouter = Router();
 
 streetRouter.get("/", StreetController.getStreets);
 streetRouter.get("/:id", StreetController.getStreet);
-streetRouter.post("/", StreetController);
-streetRouter.put("/:id", StreetController);
-streetRouter.delete("/:id", StreetController);
+streetRouter.post("/", StreetController.postProblem);
+streetRouter.put("/:id", StreetController.updateProblem);
+streetRouter.delete("/:id", StreetController.deleteProblem);
 
 export default streetRouter;
