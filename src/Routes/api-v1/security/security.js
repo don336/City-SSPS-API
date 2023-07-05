@@ -1,11 +1,12 @@
 import { Router } from "express";
-import StreetController from "../../../controller/StreetController";
-const streetRouter = Router();
+import SecurityController from "../../../controller/StreetController";
+const securityRouter = Router();
 
-streetRouter.get("/:userId/", StreetController.getStreets);
-streetRouter.get("/:userId/:id", StreetController);
-streetRouter.post("/:userId/", StreetController);
-streetRouter.put("/:userId/:id", StreetController);
-streetRouter.delete("/:userId/:id", StreetController);
+securityRouter.get("/:userId/", SecurityController.getStreets);
+securityRouter.get("/:userId/:id", SecurityController);
+securityRouter.post("/:userId/", SecurityController);
+securityRouter.put("/:userId/:id", SecurityController);
+securityRouter.delete("/:userId/:id", SecurityController
+);
 
 export default streetRouter;
