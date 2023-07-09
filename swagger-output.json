@@ -13,7 +13,9 @@
   "paths": {
     "/api/v1/street/": {
       "get": {
-        "description": "",
+        "summary":"Search Cases",
+        "tags":["Street Problems:"],
+        "description": "This route lets you search for street cases.",
         "parameters": [],
         "responses": {
           "200": {
@@ -25,7 +27,9 @@
         }
       },
       "post": {
-        "description": "",
+        "summary":["Submit a New Case"],
+        "tags":["Street Problems:"],
+        "description": "This route lets you submit a new case.",
         "parameters": [
           {
             "name": "body",
@@ -33,16 +37,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "streetName": {
+                "city": {
                   "example": "any"
                 },
-                "City": {
+                "neighborhood": {
                   "example": "any"
                 },
-                "State": {
+                "fullName": {
                   "example": "any"
                 },
-                "Country": {
+                "email": {
+                  "example": "any"
+                },
+                "dateReport": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "comments": {
                   "example": "any"
                 }
               }
@@ -64,7 +77,9 @@
     },
     "/api/v1/street/{id}": {
       "get": {
-        "description": "",
+        "summary":"Search for a Case",
+        "tags":["Street Problems:"],
+        "description": "This route lets you search for a street case.",
         "parameters": [
           {
             "name": "id",
@@ -86,7 +101,9 @@
         }
       },
       "put": {
-        "description": "",
+        "summary":"Update a Case",
+        "tags":["Street Problems:"],
+        "description": "This route lets you update a street case.",
         "parameters": [
           {
             "name": "id",
@@ -100,16 +117,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "streetName": {
+                "city": {
                   "example": "any"
                 },
-                "City": {
+                "neighborhood": {
                   "example": "any"
                 },
-                "State": {
+                "fullName": {
                   "example": "any"
                 },
-                "Country": {
+                "email": {
+                  "example": "any"
+                },
+                "dateReport": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "comments": {
                   "example": "any"
                 }
               }
@@ -129,7 +155,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "summary":"Delete a Case",
+        "tags":["Street Problems:"],
+        "description": "This route lets you delete a street case.",
         "parameters": [
           {
             "name": "id",
@@ -150,7 +178,9 @@
     },
     "/api/v1/sewer/": {
       "post": {
-        "description": "",
+        "summary":"Submit a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you submit a sewer case.",
         "parameters": [
           {
             "name": "body",
@@ -196,7 +226,9 @@
         }
       },
       "get": {
-        "description": "",
+        "summary":"Search Cases",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you search for sewer cases.",
         "parameters": [],
         "responses": {
           "200": {
@@ -210,7 +242,9 @@
     },
     "/api/v1/sewer/{id}": {
       "put": {
-        "description": "",
+        "summary":"Update a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you update a sewer case.",
         "parameters": [
           {
             "name": "id",
@@ -265,7 +299,9 @@
         }
       },
       "get": {
-        "description": "",
+        "summary":"Search a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you search for a sewer case.",
         "parameters": [
           {
             "name": "id",
@@ -287,7 +323,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "summary":"Delete a Case",
+        "tags":["Sewer Problems:"],
+        "description": "This route lets you delete a sewer case.",
         "parameters": [
           {
             "name": "id",
@@ -297,6 +335,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -308,7 +349,9 @@
     },
     "/api/v1/power/": {
       "post": {
-        "description": "",
+        "summary":"Submit a Case",
+        "tags":["Power Problems:"],
+        "description": "This route lets you submit a power case.",
         "parameters": [
           {
             "name": "body",
@@ -354,7 +397,9 @@
         }
       },
       "get": {
-        "description": "",
+        "summary":"Search Cases",
+        "tags":["Power Problems:"],
+        "description": "This route lets you search for power cases.",
         "parameters": [],
         "responses": {
           "200": {
@@ -368,7 +413,9 @@
     },
     "/api/v1/power/{id}": {
       "put": {
-        "description": "",
+        "summary":"Update a Case",
+        "tags":["Power Problems:"],
+        "description": "This route lets you update a power case.",
         "parameters": [
           {
             "name": "id",
@@ -420,7 +467,9 @@
         }
       },
       "get": {
-        "description": "",
+        "summary":"Search a Case",
+        "tags":["Power Problems:"],
+        "description": "This route lets you search for a power case.",
         "parameters": [
           {
             "name": "id",
@@ -442,7 +491,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "summary":"Delete a Case",
+        "tags":["Power Problems:"],
+        "description": "This route lets you delete a power case.",
         "parameters": [
           {
             "name": "id",
@@ -464,165 +515,173 @@
         }
       }
     },
-    "/user/auth/login": {
+    "/api/v1/security/": {
+      "post": {
+        "summary":"Submit a Case",
+        "tags":["Security Problems:"],
+        "description": "This route lets you security a power case.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "city": {
+                  "example": "any"
+                },
+                "neighborhood": {
+                  "example": "any"
+                },
+                "fullName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "dateReport": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "comments": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/user/auth/callback": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/user/protected": {
-      "get": {
-        "description": "",
+        "summary":"Search Cases",
+        "tags":["Security Problems:"],
+        "description": "This route lets you search for security cases.",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
-    "/user/auth/failure": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/user/auth/logout": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    }
-  },
-  "/api/v1/security/{id}": {
-    "put": {
-      "summary":"Update a Case",
-      "tags":["Security Problems:"],
-      "description": "This route lets you update a security case.",
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "body",
-          "in": "body",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "city": {
-                "example": "any"
-              },
-              "neighborhood": {
-                "example": "any"
-              },
-              "fullName": {
-                "example": "any"
-              },
-              "email": {
-                "example": "any"
-              },
-              "dateReport": {
-                "example": "any"
-              },
-              "level": {
-                "example": "any"
-              },
-              "comments": {
-                "example": "any"
+    "/api/v1/security/{id}": {
+      "put": {
+        "summary":"Update a Case",
+        "tags":["Security Problems:"],
+        "description": "This route lets you update a security case.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "city": {
+                  "example": "any"
+                },
+                "neighborhood": {
+                  "example": "any"
+                },
+                "fullName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "dateReport": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "comments": {
+                  "example": "any"
+                }
               }
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK"
-        },
-        "400": {
-          "description": "Bad Request"
-        },
-        "404": {
-          "description": "Not Found"
-        },
-        "500": {
-          "description": "Internal Server Error"
+      },
+      "get": {
+        "summary":"Search a Case",
+        "tags":["Security Problems:"],
+        "description": "This route lets you search for a security case.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
-      }
-    },
-    "get": {
-      "summary":"Search a Case",
-      "tags":["Security Problems:"],
-      "description": "This route lets you search for a security case.",
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK"
-        },
-        "404": {
-          "description": "Not Found"
-        },
-        "500": {
-          "description": "Internal Server Error"
-        }
-      }
-    },
-    "delete": {
-      "summary":"Delete a Case",
-      "tags":["Security Problems:"],
-      "description": "This route lets you delete a security case.",
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "No Content"
-        },
-        "404": {
-          "description": "Not Found"
-        },
-        "500": {
-          "description": "Internal Server Error"
+      },
+      "delete": {
+        "summary":"Delete a Case",
+        "tags":["Security Problems:"],
+        "description": "This route lets you delete a security case.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     }
-  }
+ }
 }

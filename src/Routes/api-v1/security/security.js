@@ -1,12 +1,21 @@
-import { Router } from "express";
-import SecurityController from "../../../controller/StreetController";
-const securityRouter = Router();
+import express from 'express';
+import SecurityController from '../../../controller/SewerController.js';
 
-securityRouter.get("/:userId/", SecurityController.getStreets);
-securityRouter.get("/:userId/:id", SecurityController);
-securityRouter.post("/:userId/", SecurityController);
-securityRouter.put("/:userId/:id", SecurityController);
-securityRouter.delete("/:userId/:id", SecurityController
-);
+const router = express.Router();
 
-export default streetRouter;
+// Create a new security problem
+router.post("/", SecurityController.createSecurity);
+
+// Update an existing security problem
+router.put("/:id", SecurityController.updateSecurity);
+
+// Get all security problems
+router.get("/", SecurityController.getAllSecurity);
+
+// Get a specific security problem
+router.get("/:id", SecurityController.getSecurityById);
+
+// Delete a security problem
+router.delete("/:id", SecurityController.deleteSecurity);
+
+export default router;

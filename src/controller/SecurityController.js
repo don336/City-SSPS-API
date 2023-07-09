@@ -1,7 +1,7 @@
 import Power from "../Models/Power";
 
-class PowerController {
-  static async getAllPowers(req, res) {
+class SecurityController {
+  static async getAllSecurity(req, res) {
     try {
       const powers = await Power.find();
       return res.status(200).json(powers);
@@ -13,7 +13,7 @@ class PowerController {
     }
   }
 
-  static async getPowerById(req, res) {
+  static async getSecurityById(req, res) {
     const { id } = req.params;
     try {
       const power = await Power.findById(id);
@@ -31,7 +31,7 @@ class PowerController {
     }
   }
 
-  static async createPower(req, res) {
+  static async createSecurity(req, res) {
     const { city, neighborhood, fullName, email, dateReport, level, comments } =
       req.body;
 
@@ -69,7 +69,7 @@ class PowerController {
     }
   }
 
-  static async updatePower(req, res) {
+  static async updateSecurity(req, res) {
     const { id } = req.params;
     const { city, neighborhood, fullName, email, dateReport, level, comments } =
       req.body;
@@ -102,7 +102,7 @@ class PowerController {
     }
   }
 
-  static async deletePower(req, res) {
+  static async deleteSecurity(req, res) {
     const { id } = req.params;
     try {
       const power = await Power.findByIdAndDelete(id);
@@ -116,4 +116,4 @@ class PowerController {
   }
 }
 
-export default PowerController;
+export default SecurityController;
