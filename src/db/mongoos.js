@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
+import path from 'path';
 
-const { DB_CONNECT } = process.env;
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 function connect() {
   // Connecting to the database
   mongoose
-    .connect(`${DB_CONNECT}`, {})
+    .connect(`${process.env.DB_CONNECT}`, {})
     .then(() => {
       console.log('Successfully connected to database');
     })

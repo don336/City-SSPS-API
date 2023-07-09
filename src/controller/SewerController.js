@@ -47,7 +47,7 @@ class SewerController {
     }
 
     try {
-      const sewer = new Sewer.create({
+      const sewer = await Sewer.create({
         city,
         neighborhood,
         fullName,
@@ -109,7 +109,7 @@ class SewerController {
       if (!sewer) {
         return res.status(404).json({ error: "Sewer not found." });
       }
-      return res.Status(204);
+      return res.sendStatus(204);
     } catch (error) {
       return res.status(500).json({
         message: "Server Error",
