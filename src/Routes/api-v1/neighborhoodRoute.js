@@ -1,5 +1,5 @@
 import { Router } from "express";
-import NeighborhoodController from "../../../controller/NeighborhoodController";
+import NeighborhoodController from "../../controller/NeighborhoodController";
 const neighborhoodRouter = Router();
 
 
