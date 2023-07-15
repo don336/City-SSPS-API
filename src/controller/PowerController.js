@@ -20,9 +20,9 @@ class PowerController {
       if (!power) {
         return res.status(400).json({ error: "Power Issue not Found" });
       }
-      res.status(200).json({
+      return res.status(200).json({
         message: "Power Issues Found",
-        Power,
+        power,
       });
     } catch (error) {
       return res
@@ -32,7 +32,7 @@ class PowerController {
   }
 
   static async createPower(req, res) {
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -41,28 +41,26 @@ class PowerController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
       return res
-        .status(422)
-        .json({ message: "Please Add all Required Fields" });
+      .status(400)
+      .json({ message: "Please Add all Required Fields" });
     }
 
     try {
-      const power = new Power.create({
+      const power = await Power.create({
         city,
         neighborhood,
         fullName,
         email,
-        dateReport,
         level,
         comments,
       });
       return res.status(201).json(power);
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         error: "Server Error",
         Error: error.message,
       });
@@ -71,7 +69,7 @@ class PowerController {
 
   static async updatePower(req, res) {
     const { id } = req.params;
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -80,7 +78,6 @@ class PowerController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
@@ -90,7 +87,7 @@ class PowerController {
     try {
       const power = await Power.findByIdAndUpdate(
         id,
-        { city, neighborhood, fullName, email, dateReport, level, comments },
+        { city, neighborhood, fullName, email, level, comments },
         { new: true }
       );
       if (!power) {
@@ -98,7 +95,7 @@ class PowerController {
       }
       return res.status(200).json(power);
     } catch (error) {
-      res.status(500).json({ message: "Server Error", Error: error.message });
+      return res.status(500).json({ message: "Server Error", Error: error.message });
     }
   }
 
@@ -109,9 +106,9 @@ class PowerController {
       if (!power) {
         return res.status(404).json({ error: "Power report not found." });
       }
-      res.sendStatus(204);
+      return res.sendStatus(204);
     } catch (error) {
-      res.status(500).json({ message: "Server Error", Error: error.message });
+      return res.status(500).json({ message: "Server Error", Error: error.message });
     }
   }
 }

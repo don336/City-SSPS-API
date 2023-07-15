@@ -30,7 +30,7 @@ class SewerController {
   }
 
   static async createSewer(req, res) {
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -39,7 +39,6 @@ class SewerController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
@@ -68,7 +67,7 @@ class SewerController {
 
   static async updateSewer(req, res) {
     const { id } = req.params;
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -77,7 +76,6 @@ class SewerController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
@@ -87,7 +85,7 @@ class SewerController {
     try {
       const sewer = await Sewer.findByIdAndUpdate(
         id,
-        { city, neighborhood, fullName, email, dateReport, level, comments },
+        { city, neighborhood, fullName, email, level, comments },
         { new: true }
       );
       if (!sewer) {

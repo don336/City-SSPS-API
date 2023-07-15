@@ -30,7 +30,7 @@ class SecurityController {
   }
 
   static async createSecurity(req, res) {
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -39,7 +39,6 @@ class SecurityController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
@@ -52,7 +51,6 @@ class SecurityController {
         neighborhood,
         fullName,
         email,
-        dateReport,
         level,
         comments,
       });
@@ -68,7 +66,7 @@ class SecurityController {
 
   static async updateSecurity(req, res) {
     const { id } = req.params;
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -77,7 +75,6 @@ class SecurityController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
@@ -87,7 +84,7 @@ class SecurityController {
     try {
       const security = await Security.findByIdAndUpdate(
         id,
-        { city, neighborhood, fullName, email, dateReport, level, comments },
+        { city, neighborhood, fullName, email, level, comments },
         { new: true }
       );
       if (!security) {
@@ -95,7 +92,7 @@ class SecurityController {
       }
       return res.status(201).json(security);
     } catch (error) {
-      res.status(500).json({ message: "Server Error", Error: error.message });
+      return res.status(500).json({ message: "Server Error", Error: error.message });
     }
   }
 
@@ -106,7 +103,7 @@ class SecurityController {
       if (!security) {
         return res.status(404).json({ error: "Security report not found." });
       }
-      res.sendStatus(204);
+      return res.sendStatus(204);
     } catch (error) {
       return res.status(500).json({ 
        message: "Server Error", 

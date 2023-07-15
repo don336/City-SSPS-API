@@ -5,10 +5,10 @@
     "description": "City SSPS API to report problems in the city",
     "version": "1.0.0"
   },
-  "host": "city-ssps-api-78vo.onrender.com",
+  "host": "localhost:8000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/api/v1/street/": {
@@ -33,16 +33,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "streetName": {
+                "city": {
                   "example": "any"
                 },
-                "City": {
+                "neighborhood": {
                   "example": "any"
                 },
-                "State": {
+                "fullName": {
                   "example": "any"
                 },
-                "Country": {
+                "email": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "comments": {
                   "example": "any"
                 }
               }
@@ -100,16 +106,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "streetName": {
+                "city": {
                   "example": "any"
                 },
-                "City": {
+                "neighborhood": {
                   "example": "any"
                 },
-                "State": {
+                "fullName": {
                   "example": "any"
                 },
-                "Country": {
+                "email": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": "any"
+                },
+                "comments": {
                   "example": "any"
                 }
               }
@@ -119,9 +131,6 @@
         "responses": {
           "201": {
             "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -139,8 +148,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "204": {
+            "description": "No Content"
           },
           "500": {
             "description": "Internal Server Error"
@@ -168,9 +177,6 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "dateReport": {
                   "example": "any"
                 },
                 "level": {
@@ -234,9 +240,6 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "dateReport": {
                   "example": "any"
                 },
                 "level": {
@@ -331,9 +334,6 @@
                 "email": {
                   "example": "any"
                 },
-                "dateReport": {
-                  "example": "any"
-                },
                 "level": {
                   "example": "any"
                 },
@@ -395,9 +395,6 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "dateReport": {
                   "example": "any"
                 },
                 "level": {
@@ -489,9 +486,6 @@
                 "email": {
                   "example": "any"
                 },
-                "dateReport": {
-                  "example": "any"
-                },
                 "level": {
                   "example": "any"
                 },
@@ -503,11 +497,11 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
-          "422": {
-            "description": "Unprocessable Entity"
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -555,9 +549,6 @@
                 "email": {
                   "example": "any"
                 },
-                "dateReport": {
-                  "example": "any"
-                },
                 "level": {
                   "example": "any"
                 },
@@ -569,8 +560,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"

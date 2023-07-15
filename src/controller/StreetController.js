@@ -41,11 +41,11 @@ class StreetController {
 
   static async postProblem(req, res) {
     try {
-      const { neighborhood, city, fullName, email, level, comments } = req.body;
+      const { city, neighborhood, fullName, email, level, comments } = req.body;
 
       if (
-        !neighborhood ||
         !city ||
+        !neighborhood ||
         !fullName ||
         !email ||
         !level ||
@@ -79,22 +79,18 @@ class StreetController {
   static async updateProblem(req, res) {
     try {
       const { id } = req.params;
-      const { streetName, City, State, Country } = req.body;
-
-      if (!streetName && !City && !State && !Country) {
-        res.status(400).json({
-          message: "At least one Field is required",
-        });
-      }
+      const { city, neighborhood, fullName, email, level, comments } = req.body;
 
       const newIssue = await Street.findByIdAndUpdate(
         { _id: id },
         {
           $set: {
-            streetName,
-            City,
-            State,
-            Country,
+            city, 
+            neighborhood, 
+            fullName, 
+            email, 
+            level, 
+            comments
           },
         },
         { new: true }

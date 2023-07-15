@@ -8,8 +8,8 @@ const doc = {
   //host: "ideapal.onrender.com",
   //schemes: ["https"],
 
-  host: "city-ssps-api-78vo.onrender.com",
-  schemes: ["https"],
+  host: "localhost:8000",
+  schemes: ["http"],
 };
 
 const outputFile = "./swagger-output.json";

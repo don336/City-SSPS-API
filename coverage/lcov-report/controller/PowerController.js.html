@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/24</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -179,10 +179,7 @@
 <a name='L114'></a><a href='#L114'>114</a>
 <a name='L115'></a><a href='#L115'>115</a>
 <a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L117'></a><a href='#L117'>117</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,7 +225,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -236,7 +232,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -260,7 +255,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,9 +317,9 @@ class PowerController {
 <span class="cstat-no" title="statement not covered" >      if (!power) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: "Power Issue not Found" });</span>
       }
-<span class="cstat-no" title="statement not covered" >      res.status(200).json({</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(200).json({</span>
         message: "Power Issues Found",
-        Power,
+        power,
       });
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      return res</span>
@@ -335,7 +329,7 @@ class PowerController {
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  st</span>atic async createPower(req, res) {
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
 <span class="cstat-no" title="statement not covered" >      req.body;</span>
 &nbsp;
     // Validate required fields
@@ -344,28 +338,26 @@ class PowerController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
 <span class="cstat-no" title="statement not covered" >      return res</span>
-        .status(422)
-        .json({ message: "Please Add all Required Fields" });
+      .status(400)
+      .json({ message: "Please Add all Required Fields" });
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const power = <span class="cstat-no" title="statement not covered" >new Power.create({</span>
+      const power = <span class="cstat-no" title="statement not covered" >await Power.create({</span>
         city,
         neighborhood,
         fullName,
         email,
-        dateReport,
         level,
         comments,
       });
 <span class="cstat-no" title="statement not covered" >      return res.status(201).json(power);</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      res.status(500).json({</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(500).json({</span>
         error: "Server Error",
         Error: error.message,
       });
@@ -374,7 +366,7 @@ class PowerController {
 &nbsp;
 <span class="fstat-no" title="function not covered" >  st</span>atic async updatePower(req, res) {
     const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
-    const { city, neighborhood, fullName, email, dateReport, level, comments } =
+    const { city, neighborhood, fullName, email, level, comments } =
 <span class="cstat-no" title="statement not covered" >      req.body;</span>
 &nbsp;
     // Validate required fields
@@ -383,7 +375,6 @@ class PowerController {
       !neighborhood ||
       !fullName ||
       !email ||
-      !dateReport ||
       !level ||
       !comments
     ) {
@@ -393,7 +384,7 @@ class PowerController {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const power = <span class="cstat-no" title="statement not covered" >await Power.findByIdAndUpdate(</span>
         id,
-        { city, neighborhood, fullName, email, dateReport, level, comments },
+        { city, neighborhood, fullName, email, level, comments },
         { new: true }
       );
 <span class="cstat-no" title="statement not covered" >      if (!power) {</span>
@@ -401,7 +392,7 @@ class PowerController {
       }
 <span class="cstat-no" title="statement not covered" >      return res.status(200).json(power);</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      res.status(500).json({ message: "Server Error", Error: error.message });</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(500).json({ message: "Server Error", Error: error.message });</span>
     }
   }
 &nbsp;
@@ -412,9 +403,9 @@ class PowerController {
 <span class="cstat-no" title="statement not covered" >      if (!power) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(404).json({ error: "Power report not found." });</span>
       }
-<span class="cstat-no" title="statement not covered" >      res.sendStatus(204);</span>
+<span class="cstat-no" title="statement not covered" >      return res.sendStatus(204);</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      res.status(500).json({ message: "Server Error", Error: error.message });</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(500).json({ message: "Server Error", Error: error.message });</span>
     }
   }
 }
@@ -427,7 +418,7 @@ export default PowerController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-15T14:14:57.974Z
+                at 2023-07-15T16:42:44.564Z
             </div>
         <script src="../prettify.js"></script>
         <script>
