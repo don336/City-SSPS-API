@@ -6,7 +6,7 @@ class SecurityController {
       const security = await Security.find();
       return res.status(200).json(security);
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: "server Error",
         err: error.message,
       });
@@ -51,7 +51,7 @@ class SecurityController {
     }
 
     try {
-      const security = new Security.create({
+      const security = await Security.create({
         city,
         neighborhood,
         fullName,
@@ -60,9 +60,10 @@ class SecurityController {
         level,
         comments,
       });
+
       return res.status(201).json(security);
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         error: "Server Error",
         Error: error.message,
       });

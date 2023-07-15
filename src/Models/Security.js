@@ -32,4 +32,4 @@ const securitySchema = mongoose.Schema({
   }
 });
 
-export default mongoose.model("Security", securitySchema, "security");
+export default mongoose.model('Security', securitySchema, 'security');
