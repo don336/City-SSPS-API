@@ -1,5 +1,5 @@
 import express from 'express';
-import SecurityController from '../../../controller/SewerController.js';
+import SecurityController from '../../../controller/SecurityController.js';
 
 const router = express.Router();
 
