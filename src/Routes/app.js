@@ -20,8 +20,6 @@ app.use(sessionApp({
 require('../auth/auth.js');
 
 
-
-
 app.use(cors());
 app.use(express.json());
 
