@@ -2,7 +2,7 @@ import { Router } from "express";
 import streetRoute from "./street/Street";
 import sewerRoute from "./sewer/Sewer";
 import powerRoute from "./power/Power";
-import securityRoute from "./power/Power";
+import securityRoute from "./security/Security";
 import authRouter from "./Oauth/oauthRoute";
 import { isAuthenticated } from "../../middleware/auth";
 import swaggerRouter from "../swaggerRoute";
