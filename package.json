@@ -9,7 +9,7 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "swagger": "node swagger.js",
-    "test": "jest"
+    "test": "env-cmd -f ./config/test.env jest --exec"
   },
   "repository": {
     "type": "git",
