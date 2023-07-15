@@ -19,7 +19,7 @@ class StreetController {
     try {
       const { id } = req.params;
 
-      const street = await Street.findById(id);
+      const street = await Street.findById({ _id: id });
 
       if (!street) {
         return res.status(400).json({
@@ -41,19 +41,28 @@ class StreetController {
 
   static async postProblem(req, res) {
     try {
-      const { streetName, City, State, Country } = req.body;
+      const { neighborhood, city, fullName, email, level, comments } = req.body;
 
-      if (!streetName || !City || !State || !Country) {
+      if (
+        !neighborhood ||
+        !city ||
+        !fullName ||
+        !email ||
+        !level ||
+        !comments
+      ) {
         res.status(400).json({
           message: "All Fields are required",
         });
       }
 
       const newIssue = await Street.create({
-        streetName,
-        City,
-        State,
-        Country,
+        neighborhood,
+        city,
+        fullName,
+        email,
+        level,
+        comments,
       });
 
       res.status(201).json({
@@ -109,8 +118,8 @@ class StreetController {
 
       const newIssue = await Street.deleteOne({ _id: id });
 
-      res.status(201).json({
-        message: "Updated Issue Added to Database",
+      res.status(204).json({
+        message: "Issue Deleted",
         newIssue,
       });
     } catch (error) {
