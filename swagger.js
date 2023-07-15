@@ -8,7 +8,7 @@ const doc = {
   //host: "ideapal.onrender.com",
   //schemes: ["https"],
 
-  host: "https://city-ssps-api-78vo.onrender.com",
+  host: "city-ssps-api-78vo.onrender.com",
   schemes: ["https"],
 };
 
