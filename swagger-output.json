@@ -5,10 +5,10 @@
     "description": "City SSPS API to report problems in the city",
     "version": "1.0.0"
   },
-  "host": "localhost:8000",
+  "host": "https://city-ssps-api-78vo.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api/v1/street/": {
