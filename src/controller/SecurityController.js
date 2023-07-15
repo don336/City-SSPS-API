@@ -1,4 +1,4 @@
-import Power from "../Models/Power";
+import Power from "../Models/Security";
 
 class SecurityController {
   static async getAllSecurity(req, res) {
