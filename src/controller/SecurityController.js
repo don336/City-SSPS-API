@@ -1,10 +1,10 @@
-import Power from "../Models/Security";
+import Security from "../Models/Security";
 
 class SecurityController {
   static async getAllSecurity(req, res) {
     try {
-      const powers = await Power.find();
-      return res.status(200).json(powers);
+      const security = await Security.find();
+      return res.status(200).json(security);
     } catch (error) {
       res.status(500).json({
         message: "server Error",
@@ -16,9 +16,9 @@ class SecurityController {
   static async getSecurityById(req, res) {
     const { id } = req.params;
     try {
-      const power = await Power.findById(id);
-      if (!power) {
-        return res.status(400).json({ error: "Power Issue not Found" });
+      const security = await Security.findById(id);
+      if (!security) {
+        return res.status(400).json({ error: "Security Issue not Found" });
       }
       res.status(200).json({
         message: "Power Issues Found",
@@ -51,7 +51,7 @@ class SecurityController {
     }
 
     try {
-      const power = new Power.create({
+      const security = new Security.create({
         city,
         neighborhood,
         fullName,
@@ -60,7 +60,7 @@ class SecurityController {
         level,
         comments,
       });
-      return res.status(201).json(power);
+      return res.status(201).json(security);
     } catch (error) {
       res.status(500).json({
         error: "Server Error",
@@ -88,15 +88,15 @@ class SecurityController {
     }
 
     try {
-      const power = await Power.findByIdAndUpdate(
+      const security = await Security.findByIdAndUpdate(
         id,
         { city, neighborhood, fullName, email, dateReport, level, comments },
         { new: true }
       );
-      if (!power) {
-        return res.status(400).json({ error: "Power Report not found." });
+      if (!security) {
+        return res.status(400).json({ error: "Security Report not found." });
       }
-      return res.status(200).json(power);
+      return res.status(200).json(security);
     } catch (error) {
       res.status(500).json({ message: "Server Error", Error: error.message });
     }
