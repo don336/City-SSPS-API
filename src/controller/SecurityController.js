@@ -43,9 +43,7 @@ class SecurityController {
       !level ||
       !comments
     ) {
-      return res
-        .status(422)
-        .json({ message: "Please Add all Required Fields" });
+      return res.status(400).json({ message: "Missing required fields." });
     }
 
     try {
@@ -59,7 +57,7 @@ class SecurityController {
         comments,
       });
 
-      return res.status(201).json(security);
+      return res.status(200).json(security);
     } catch (error) {
       return res.status(500).json({
         error: "Server Error",
@@ -95,7 +93,7 @@ class SecurityController {
       if (!security) {
         return res.status(400).json({ error: "Security Report not found." });
       }
-      return res.status(200).json(security);
+      return res.status(201).json(security);
     } catch (error) {
       res.status(500).json({ message: "Server Error", Error: error.message });
     }
@@ -104,13 +102,16 @@ class SecurityController {
   static async deleteSecurity(req, res) {
     const { id } = req.params;
     try {
-      const power = await Power.findByIdAndDelete(id);
-      if (!power) {
-        return res.status(404).json({ error: "Power report not found." });
+      const security = await Security.findByIdAndDelete(id);
+      if (!security) {
+        return res.status(404).json({ error: "Security report not found." });
       }
       res.sendStatus(204);
     } catch (error) {
-      res.status(500).json({ message: "Server Error", Error: error.message });
+      return res.status(500).json({ 
+       message: "Server Error", 
+       Error: error.message 
+      });
     }
   }
 }
