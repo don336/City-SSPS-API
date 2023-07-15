@@ -3,8 +3,8 @@ import Security from "../Models/Security";
 class SecurityController {
   static async getAllSecurity(req, res) {
     try {
-      const security = await Security.find();
-      return res.status(200).json(security);
+      const securities = await Security.find();
+      return res.status(200).json(securities);
     } catch (error) {
       return res.status(500).json({
         message: "server Error",
@@ -20,14 +20,12 @@ class SecurityController {
       if (!security) {
         return res.status(400).json({ error: "Security Issue not Found" });
       }
-      res.status(200).json({
-        message: "Power Issues Found",
-        Power,
-      });
+      return res.status(200).json(security);
     } catch (error) {
-      return res
-        .status(500)
-        .json({ error: "Server Error", Error: error.message });
+      return res.status(500).json({
+        message: "Server Error",
+        Error: error.message,
+      });
     }
   }
 
