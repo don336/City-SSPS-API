@@ -6,12 +6,12 @@ class SewerController {
   static async getAllSewers(req, res) {
     
     const sewers = await Sewer.find();
-    // if(!sewers) {
-    //   return res.status(400).json({
-    //     message: "No any added Sewers",
-    //     Error: error.message,
-    //   });
-    // } 
+    if(!sewers) {
+      return res.status(400).json({
+        message: "No any added Sewers",
+        Error: error.message,
+      });
+    } 
         
     return res.status(200).json({message: "Sewers Found", sewers});
   }
