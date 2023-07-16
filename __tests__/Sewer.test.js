@@ -7,7 +7,7 @@ let session;
 
 describe("Sewer Management", () => {
   beforeAll(async () => {
-    await testBase.get("http://localhost:8080/user/auth/login").send();
+    await testBase.get("http://localhost:8000/user/auth/login").send();
 
     const swrObj = {
       city: "city1",
@@ -24,7 +24,6 @@ describe("Sewer Management", () => {
     const sewer = await testBase.post("/sewer").send(swrObj);
     const id = sewer.body.sewer._id;
     swrId = id;
-    console.log(swrId, "==========================>");
   }, 20000);
 
   afterAll(async () => {
@@ -86,7 +85,7 @@ describe("Sewer Management", () => {
       level: "3"
     };
     const response = await testBase.post("/sewer").send(issue);
-    console.log(response.body);
+    
     expect(response.status).toBe(400);
     expect(response.body.message).toBe("All Fields are required");
   });

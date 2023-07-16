@@ -15,8 +15,9 @@ Route.use("/api/v1/sewer", sewerRoute);
 Route.use("/api/v1/power", powerRoute);
 Route.use("/api/v1/security", securityRoute);
 Route.use("/user", authRouter);
+Route.use("/api/v1/neighborhood", neighborhoodRouter);
 Route.use(isAuthenticated);
 Route.use("/", swaggerRouter);
-Route.use("/neighborhood", neighborhoodRouter);
+
 
 export default Route;

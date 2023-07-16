@@ -656,7 +656,7 @@
         }
       }
     },
-    "/neighborhood/{neighborhoodInput}": {
+    "/api/v1/neighborhood/{neighborhoodInput}": {
       "get": {
         "summary":"Search Cases",
         "tags":["All Problems:"],
