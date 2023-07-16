@@ -1,36 +1,42 @@
 import Sewer from "../Models/Sewer";
+import mongoose from 'mongoose';
+
 
 class SewerController {
   static async getAllSewers(req, res) {
-    try {
-      const sewers = await Sewer.find();
-      return res.status(200).json(sewers);
-    } catch (error) {
-      return res.status(500).json({
-        message: "Server Error",
+    
+    const sewers = await Sewer.find();
+    if(!sewers) {
+      return res.status(400).json({
+        message: "No any added Sewers",
         Error: error.message,
       });
-    }
+    } 
+        
+    return res.status(200).json({message: "Sewers Found", sewers});
   }
 
   static async getSewerById(req, res) {
     const { id } = req.params;
-    try {
-      const sewer = await Sewer.findById(id);
-      if (!sewer) {
-        return res.status(404).json({ error: "Sewer not found." });
-      }
-      return res.status(200).json(sewer);
-    } catch (error) {
+    if (!id || id.length !== 24) {
       return res.status(500).json({
-        message: "Server Error",
+        message: "Wrong id",
         Error: error.message,
       });
+    }
+    try {
+      const sewer = await Sewer.findById(id);
+      return sewer 
+        ? res.status(200).json({ message: "Sewer Found", sewer })
+        : res.status(400).json({ message: "Sewer Issue not found" });
+    } catch (error) {
+      return res.status(500).json({ message: "Server Error", Error: error.message });
     }
   }
 
   static async createSewer(req, res) {
-    const { city, neighborhood, fullName, email, level, comments } =
+    try {
+      const { city, neighborhood, fullName, email, level, comments } =
       req.body;
 
     // Validate required fields
@@ -42,21 +48,20 @@ class SewerController {
       !level ||
       !comments
     ) {
-      return res.status(400).json({ error: "Missing required fields." });
+      res.status(400).json({ message: "All Fields are required" });
     }
 
-    try {
+    
       const sewer = await Sewer.create({
         city,
         neighborhood,
         fullName,
         email,
-        dateReport,
         level,
         comments,
       });
 
-      return res.status(201).json(sewer);
+      return res.status(201).json({ message: "Issue Added to Database", sewer });
     } catch (error) {
       return res.status(500).json({
         message: "Server Error",
@@ -79,7 +84,7 @@ class SewerController {
       !level ||
       !comments
     ) {
-      return res.status(400).json({ error: "Missing required fields." });
+      return res.status(400).json({ message: "Missing required fields." });
     }
 
     try {
@@ -91,7 +96,7 @@ class SewerController {
       if (!sewer) {
         return res.status(404).json({ error: "Sewer not found." });
       }
-      return res.status(201).json(sewer);
+      return res.status(201).json({ message: "Updated Issue Added to Database", sewer });
     } catch (error) {
       return res.status(500).json({
         message: "Server Error",
@@ -105,9 +110,12 @@ class SewerController {
     try {
       const sewer = await Sewer.findByIdAndDelete(id);
       if (!sewer) {
-        return res.status(404).json({ error: "Sewer not found." });
+        return res.status(404).json({ message: "Sewer not found." });
       }
-      return res.sendStatus(204);
+      return res.status(204).json({
+        message: "Issue Deleted",
+        sewer
+      });
     } catch (error) {
       return res.status(500).json({
         message: "Server Error",
