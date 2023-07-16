@@ -55,6 +55,13 @@ describe("Sewer Management", () => {
     expect(response.body.message).toBe("Sewer Issue not found");
   });
 
+  it("shouldn't return an issue with a non valid id", async () => {
+    const response = await testBase.get(`/sewer/r4nd0mnumb3r`);
+
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe("Wrong id");
+  });
+
   it("should post a Sewer issue", async () => {
     const issue = {
       city: "city2",
@@ -101,6 +108,21 @@ describe("Sewer Management", () => {
     expect(response.body.message).toBe("Updated Issue Added to Database");
   });
 
+  it("Should not Update the sewer issue given wrong id", async () => {
+    const issue = {
+      city: "city2",
+      neighborhood: "neigh3",
+      fullName: "John Doe",
+      email: "Doe@gmail.com",
+      level: "3",
+      comments: "I need help",
+    };
+    const response = await testBase.put(`/sewer/64b247e0693c1ad3eab2arb`).send(issue);
+
+    expect(response.status).toBe(500);
+    expect(response.body.message).toBe("Server Error");
+  });
+
   it("Should not Update the sewer issue given id", async () => {
     const response = await testBase
       .put(`/sewer/64b247e0693c1ad3eab2arb4`)
@@ -112,7 +134,7 @@ describe("Sewer Management", () => {
 
   it("Should delete a sewer issue", async () => {
     const response = await testBase.delete(`/sewer/${swrId}`).send();
-
+    
     expect(response.status).toBe(204);
     //expect(response.body.message).toBe("Issue Deleted");
   });
