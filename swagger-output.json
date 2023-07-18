@@ -8,7 +8,7 @@
   "host": "city-ssps-api-78vo.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "https", "http"
   ],
   "paths": {
     "/api/v1/street/": {

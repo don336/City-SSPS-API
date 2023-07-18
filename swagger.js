@@ -5,8 +5,8 @@ const doc = {
     title: "City SSPS API",
     description: "City SSPS API to report problems in the city",
   },
-  //host: "ideapal.onrender.com",
-  //schemes: ["https"],
+  //host: "localhost:8000",
+  //schemes: ["http"],
 
   host: "city-ssps-api-78vo.onrender.com",
   schemes: ["https"],

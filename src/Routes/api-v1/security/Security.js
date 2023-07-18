@@ -4,18 +4,18 @@ import SecurityController from '../../../controller/SecurityController.js';
 const router = express.Router();
 
 // Create a new security problem
-router.post("/", SecurityController.createSecurity);
+router.post("/", SecurityController.postProblem);
 
 // Update an existing security problem
-router.put("/:id", SecurityController.updateSecurity);
+router.put("/:id", SecurityController.updateProblem);
 
 // Get all security problems
-router.get("/", SecurityController.getAllSecurity);
+router.get("/", SecurityController.getSecurities);
 
 // Get a specific security problem
-router.get("/:id", SecurityController.getSecurityById);
+router.get("/:id", SecurityController.getSecurity);
 
 // Delete a security problem
-router.delete("/:id", SecurityController.deleteSecurity);
+router.delete("/:id", SecurityController.deleteProblem);
 
 export default router;
